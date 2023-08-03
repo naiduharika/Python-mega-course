@@ -14,47 +14,47 @@ while True:
     user_action = input("Type add, show, edit, complete, or exit: ")
     user_action = user_action.strip()
 
-    match user_action:
-        case 'add':
-            todo = input("Enter a todo: ") + "\n"
+    # match user_action:
+    if 'add' in user_action:
+        todo = user_action[4:] + "\n"
 
-            todos = read_file('files/todos.txt')
+        todos = read_file('files/todos.txt')
 
-            todos.append(todo)
+        todos.append(todo)
 
-            write_to_file('files/todos.txt', todos)
-        case 'show' | 'display':
-            todos = read_file('files/todos.txt')
-            # new_todos = [item.strip('\n') for item in todos]
+        write_to_file('files/todos.txt', todos)
+        print(f"Todo {todo.title().strip()} was added to the list")
+    elif 'show' in user_action:
+        todos = read_file('files/todos.txt')
 
-            for index, item in enumerate(todos):
-                item = item.strip('\n')
-                row = f'{index + 1}-{item.title()}'
-                print(row)
-        case 'edit':
-            number = int(input("Number of the todo to edit: "))
-            index = number - 1
+        for index, item in enumerate(todos):
+            item = item.strip('\n')
+            row = f'{index + 1}-{item.title()}'
+            print(row)
+    elif 'edit' in user_action:
+        number = int(user_action[5:])
+        index = number - 1
 
-            todos = read_file('files/todos.txt')
+        todos = read_file('files/todos.txt')
 
-            new_todo = input("Enter new todo: ")
-            todos[index] = new_todo + "\n"
+        new_todo = input("Enter new todo: ")
+        todos[index] = new_todo + "\n"
 
-            write_to_file('files/todos.txt', todos)
-        case 'complete':
-            number = int(input("Number of the todo to complete: "))
-            index = number - 1
+        write_to_file('files/todos.txt', todos)
+    elif 'complete' in user_action:
+        number = int(user_action[9:])
+        index = number - 1
 
-            todos = read_file('files/todos.txt')
-            todo_to_remove = todos[index].strip('\n')
-            todos.pop(index)
+        todos = read_file('files/todos.txt')
+        todo_to_remove = todos[index].strip('\n')
+        todos.pop(index)
 
-            write_to_file('files/todos.txt', todos)
-            message = f"Todo {todo_to_remove.title()} was removed from the list"
-            print(message)
-        case 'exit':
-            break
-        case _:
-            print("Hey, you entered an unknown command")
+        write_to_file('files/todos.txt', todos)
+        message = f"Todo {todo_to_remove.title()} was removed from the list"
+        print(message)
+    elif 'exit' in user_action:
+        break
+    else:
+        print("Command is not valid")
 
 print('Bye!')

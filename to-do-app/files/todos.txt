@@ -1,3 +1,7 @@
 clean
 Throw
 fix
+Play soccer
+eat out
+fix the door
+clean washroom
