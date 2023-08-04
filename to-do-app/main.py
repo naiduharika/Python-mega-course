@@ -15,7 +15,7 @@ while True:
     user_action = user_action.strip()
 
     # match user_action:
-    if 'add' in user_action:
+    if user_action.startswith('add'):
         todo = user_action[4:] + "\n"
 
         todos = read_file('files/todos.txt')
@@ -24,35 +24,49 @@ while True:
 
         write_to_file('files/todos.txt', todos)
         print(f"Todo {todo.title().strip()} was added to the list")
-    elif 'show' in user_action:
+    elif user_action.startswith('show'):
         todos = read_file('files/todos.txt')
 
         for index, item in enumerate(todos):
             item = item.strip('\n')
             row = f'{index + 1}-{item.title()}'
             print(row)
-    elif 'edit' in user_action:
-        number = int(user_action[5:])
-        index = number - 1
+    elif user_action.startswith('edit'):
+        try:
+            number = int(user_action[5:])
+            index = number - 1
 
-        todos = read_file('files/todos.txt')
+            todos = read_file('files/todos.txt')
 
-        new_todo = input("Enter new todo: ")
-        todos[index] = new_todo + "\n"
+            new_todo = input("Enter new todo: ")
+            todos[index] = new_todo + "\n"
 
-        write_to_file('files/todos.txt', todos)
-    elif 'complete' in user_action:
-        number = int(user_action[9:])
-        index = number - 1
+            write_to_file('files/todos.txt', todos)
+        except ValueError:
+            print("Your command is not valid.")
+            continue
+        except IndexError:
+            print("There is no item with that number.")
+            continue
+    elif user_action.startswith('complete'):
+        try:
+            number = int(user_action[9:])
+            index = number - 1
 
-        todos = read_file('files/todos.txt')
-        todo_to_remove = todos[index].strip('\n')
-        todos.pop(index)
+            todos = read_file('files/todos.txt')
+            todo_to_remove = todos[index].strip('\n')
+            todos.pop(index)
 
-        write_to_file('files/todos.txt', todos)
-        message = f"Todo {todo_to_remove.title()} was removed from the list"
-        print(message)
-    elif 'exit' in user_action:
+            write_to_file('files/todos.txt', todos)
+            message = f"Todo {todo_to_remove.title()} was removed from the list"
+            print(message)
+        except ValueError:
+            print("Your command is not valid.")
+            continue
+        except IndexError:
+            print("There is no item with that number.")
+            continue
+    elif user_action.startswith('exit'):
         break
     else:
         print("Command is not valid")

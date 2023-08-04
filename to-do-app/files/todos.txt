@@ -1,5 +1,5 @@
-clean
-Throw
+add a new player
+update the os
 fix
 Play soccer
 eat out
