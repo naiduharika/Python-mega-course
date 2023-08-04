@@ -1,5 +1,5 @@
-def read_file(filename):
-    with open('files/todos.txt', 'r') as file:
+def get_todos_from_file(filename):
+    with open(filename, 'r') as file:
         todos_list = file.readlines()
     return todos_list
 
@@ -18,14 +18,14 @@ while True:
     if user_action.startswith('add'):
         todo = user_action[4:] + "\n"
 
-        todos = read_file('files/todos.txt')
+        todos = get_todos_from_file('files/todos.txt')
 
         todos.append(todo)
 
         write_to_file('files/todos.txt', todos)
         print(f"Todo {todo.title().strip()} was added to the list")
     elif user_action.startswith('show'):
-        todos = read_file('files/todos.txt')
+        todos = get_todos_from_file('files/todos.txt')
 
         for index, item in enumerate(todos):
             item = item.strip('\n')
@@ -36,7 +36,7 @@ while True:
             number = int(user_action[5:])
             index = number - 1
 
-            todos = read_file('files/todos.txt')
+            todos = get_todos_from_file('files/todos.txt')
 
             new_todo = input("Enter new todo: ")
             todos[index] = new_todo + "\n"
@@ -53,7 +53,7 @@ while True:
             number = int(user_action[9:])
             index = number - 1
 
-            todos = read_file('files/todos.txt')
+            todos = get_todos_from_file('files/todos.txt')
             todo_to_remove = todos[index].strip('\n')
             todos.pop(index)
 
