@@ -1,8 +1,10 @@
 # from functions import get_todos_from_file, write_to_file
 import functions
 import time
+
 now = time.strftime("%b %d, %Y %H:%M:%S")
 print("It is", now)
+
 while True:
     # Get user input and strip space char from it
     user_action = input("Type add, show, edit, complete, or exit: ")
