@@ -1,4 +1,4 @@
-# from functions import get_todos_from_file, write_to_file
+# from functions import get_todos, write_todos
 import functions
 import time
 
@@ -14,14 +14,14 @@ while True:
     if user_action.startswith('add'):
         todo = user_action[4:] + "\n"
 
-        todos = functions.get_todos_from_file()
+        todos = functions.get_todos()
 
         todos.append(todo)
 
-        functions.write_to_file(todos)
+        functions.write_todos(todos)
         print(f"Todo {todo.title().strip()} was added to the list")
     elif user_action.startswith('show'):
-        todos = functions.get_todos_from_file()
+        todos = functions.get_todos()
 
         for index, item in enumerate(todos):
             item = item.strip('\n')
@@ -32,12 +32,12 @@ while True:
             number = int(user_action[5:])
             index = number - 1
 
-            todos = functions.get_todos_from_file()
+            todos = functions.get_todos()
 
             new_todo = input("Enter new todo: ")
             todos[index] = new_todo + "\n"
 
-            functions.write_to_file(todos)
+            functions.write_todos(todos)
         except ValueError:
             print("Your command is not valid.")
             continue
@@ -49,11 +49,11 @@ while True:
             number = int(user_action[9:])
             index = number - 1
 
-            todos = functions.get_todos_from_file()
+            todos = functions.get_todos()
             todo_to_remove = todos[index].strip('\n')
             todos.pop(index)
 
-            functions.write_to_file(todos)
+            functions.write_todos(todos)
             message = f"Todo {todo_to_remove.title()} was removed from the list"
             print(message)
         except ValueError:

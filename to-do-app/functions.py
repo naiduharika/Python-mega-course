@@ -1,4 +1,4 @@
-def get_todos_from_file(filename: str = "todos.txt") -> list[str]:
+def get_todos(filename: str = "todos.txt") -> list[str]:
     """
     Read a text file and return the list of
     to-do items
@@ -8,7 +8,7 @@ def get_todos_from_file(filename: str = "todos.txt") -> list[str]:
     return todos_list
 
 
-def write_to_file(todos_list: list, filename: str = "todos.txt") -> None:
+def write_todos(todos_list: list, filename: str = "todos.txt") -> None:
     """
     Write the to-do items to a text file
     """
@@ -18,4 +18,4 @@ def write_to_file(todos_list: list, filename: str = "todos.txt") -> None:
 
 if __name__ == "__main__":
     print("Hello")
-    print(get_todos_from_file())
+    print(get_todos())
